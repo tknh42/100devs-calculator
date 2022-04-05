@@ -2,16 +2,15 @@ class Calculator {
     constructor() {
 
         //Public properties
-        this.runVal = 0;
         this.displayVal = 0;
         this.operator = [];
+        this.decimalState = false;
 
         //Private properties
-        let runningTotal, inputValue = 0;
-        let numButtons = [0, 1, 2, 3, 4, 5, 6, 7, 8 ,9,]
-        let operators = ['plus', 'minus', 'divide', 'multiply', 'equal']
-        let inputElements  = document.querySelectorAll('.input')
-        // let inputValues = getInputValues(inputElements)
+        let inputVal, runningTotal = 0;
+        let runVal = 0;
+        let firstVal, secondVal = 0;
+
 
         //Public methods
         this.add = function() {
@@ -41,35 +40,62 @@ class Calculator {
     
 
         //Private Methods
-        let updateDisplay = function() {
-            let dispVal = document.querySelector('.display');
-            dispVal.innerHTML = this.val;
+        let updateVal = function(input) {
+            let inputVal = Number(input)
+            if (isNaN(inputVal) == true){
+                firstVal = Number
+                runVal = 0
+            }
+            else {
+                if (runVal == 0 && input !== 0){
+                    runVal = input
+                    console.log(runVal)
+                }
+                else {
+                    runVal += input
+                }
+            }
         }
 
+        let updateDisplay = function(input) {
+            let disp= document.querySelector('.display');
+            disp.innerHTML = runVal
+        }
+
+        //Getter and setter method
+        Object.defineProperty(this, 'inputVal', {
+            get: function () {
+                return inputVal;
+            },
+            // set: function (value) {
+            //     duration = value;
+            // }
+        })
 
         //Initiate the object
         this.init = function() {
             //event handler
-            let calculate = function() {
-                console.log('button pressed')
+            let calculate = function(ele) {
+                updateVal(ele)
+                updateDisplay()
             }
 
             //event listener
-            (function(){
-                let calc = document.getElementById('#calculator');
-                let buttons = calc.querySelectorAll('input');
+            let main = function(){
+                let calc = document.getElementById('calculator');
+                let buttons = calc.querySelectorAll('button');
                 for (let i = 0; i < buttons.length; i++){
-                    buttons[i].addEventListener("click", calculate());
+                    buttons[i].addEventListener("click", () => calculate(buttons[i].value))
                 };
-            });
-
+            }
+            main();
         }
     }
 }
 
 calc = new Calculator
 
-window.onload = calc.init;
+window.onload = calc.init();
 
 
 

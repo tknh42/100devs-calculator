@@ -16,7 +16,7 @@ body{
 }
 
 /* Calculator Body */
-#calulator{
+#calculator{
     padding: 1rem;
     margin: 1rem;
     border: 1px solid black;
@@ -67,7 +67,7 @@ body{
         width:100%;
         border: 2px #5A5A66 solid;
     }
-    input[type='button']{
+    button{
         background: #D4D4AA;
         font: 20px  'Source Sans Pro' ;
         color:#2C514C;
@@ -75,10 +75,10 @@ body{
         height: 5rem;
         margin: .5rem;
     }
-        input[type='button']:hover {
+        button:hover {
             background-color: grey;
         }
-        input[type='button']:active {
+        button:active {
             background-color: black;
         }
 
